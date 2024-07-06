@@ -1,6 +1,7 @@
 // Applications images
 
 import { resourceMap } from '@/constants/resourceMap';
+import type { AppInfo } from '@/typings';
 
 const {
   Explorer,
@@ -25,7 +26,7 @@ const {
 // const Notepad = Component;
 // const VSCode = Component;
 
-export const Applications = [
+export const applications: AppInfo[] = [
   {
     icon: Explorer,
     appType: 'FileExplorer',
@@ -53,7 +54,7 @@ export const Applications = [
   },
   {
     icon: RecycleBin,
-    appType: 'RecycleBinappType: ',
+    appType: 'RecycleBin: ',
     singleInstance: true,
     name: 'Recycle bin',
   },
@@ -92,16 +93,17 @@ export const desktopApps = [
   },
   {
     icon: RecycleBin,
-    appType: 'FileExplorer',
+    appType: 'RecycleBin',
     name: 'Recycle bin',
   },
   {
     icon: Eadge,
+    appType: 'FileExplorer',
     name: 'Edge',
   },
   {
     icon: VSCodeIcon,
-    appType: 'FileExplorer',
+    appType: 'VSCode',
     name: 'Visual Studio Code',
   },
   {

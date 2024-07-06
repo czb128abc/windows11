@@ -1,7 +1,10 @@
-import App from "@/components/App";
-import TaskBar from "@/components/TaskBar";
-import FileExplorer from "@/components/windowsApps/FileExplorer";
-import useWindows from "@/hooks/useWindows";
+import App from '@/components/App';
+import TaskBar from '@/components/TaskBar';
+import {
+  AppType,
+  getApplicationByAppType,
+} from '@/components/windowsApps/consts';
+import useWindows from '@/hooks/useWindows';
 
 const Desktop: React.FC = () => {
   const { currentDesktop } = useWindows();
@@ -10,11 +13,10 @@ const Desktop: React.FC = () => {
     <div className="desktop">
       <App />
       <TaskBar />
-      {
-        runningApps.map((appIns) => {
-          return <FileExplorer key={appIns.id} appIns={appIns} ></FileExplorer>;
-        })
-      }
+      {runningApps.map((appIns) => {
+        const Temp = getApplicationByAppType(appIns.appInfo.appType as AppType);
+        return <Temp key={appIns.id} appIns={appIns}></Temp>;
+      })}
     </div>
   );
 };

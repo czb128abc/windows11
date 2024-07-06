@@ -1,4 +1,4 @@
-import { defineConfig } from "@umijs/max";
+import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
   antd: {},
@@ -8,8 +8,9 @@ export default defineConfig({
   initialState: {},
   request: {},
   layout: {
-    title: "@umijs/max",
+    title: 'windows11',
   },
-  npmClient: "pnpm",
-  tailwindcss: {},
+  npmClient: 'pnpm',
+  // tailwindcss:{},
+  extraPostCSSPlugins: [require('tailwindcss'), require('autoprefixer')],
 });

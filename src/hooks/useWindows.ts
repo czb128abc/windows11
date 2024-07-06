@@ -12,6 +12,7 @@ function getDefaultAppInfo(list: AppInfo[]) {
       icon: app.icon,
       name: app.name,
       singleInstance: true,
+      appType: app.appType,
     };
   });
 }
@@ -50,8 +51,9 @@ export const actions = {
   /**
    * 启动应用程序。
    * @param appInfo 应用程序信息对象，包含应用程序的名称和是否为单一实例等信息。
+   * @param forceDisplayWindow 是否强制显示窗口，默认为false。
    */
-  runApp(appInfo: AppInfo) {
+  runApp(appInfo: AppInfo, forceDisplayWindow = false) {
     // 获取当前桌面环境
     const tempDesktop = getCurrentDesktop();
     // 解构获取appInfo中的单一实例属性
@@ -68,7 +70,11 @@ export const actions = {
     );
     // 如果找到相同ID的应用实例，切换其最小化状态
     if (insWithSameId) {
-      insWithSameId.isMinimized = !insWithSameId.isMinimized;
+      if (forceDisplayWindow) {
+        insWithSameId.isMinimized = false;
+      } else {
+        insWithSameId.isMinimized = !insWithSameId.isMinimized;
+      }
       // 如果应用实例不是最小化状态，将其置于最前端
       if (!insWithSameId.isMinimized) {
         actions.setWindowPositionForemost(insWithSameId.id);

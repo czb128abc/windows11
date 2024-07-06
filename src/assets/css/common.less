@@ -1,40 +1,39 @@
 @import url('./base.less');
 
 .desktop {
-    color: #fff;
-    position: relative;
-    height: 100vh;
-    // overflow: hidden;
-    padding-bottom: @task-bar-height;
-    background: #091328;
-    font-size: 12px;
+  color: #fff;
+  height: 100vh;
+  padding-bottom: @task-bar-height;
+  background: #091328;
+  font-size: 12px;
+  @apply relative;
 }
 
 .desktop-app {
-    padding-bottom: 0.5rem;
-    width: 72px;
-    max-height: 102px;
-    color: #fff;
-    overflow: hidden;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  padding-bottom: 0.5rem;
+  width: 72px;
+  max-height: 102px;
+  color: #fff;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    width: 40px;
+    height: 40px;
+    margin-top: 1rem;
+    margin-bottom: 10px;
+  }
+
+  &:hover {
+    background: var(--win-app-hover-bg);
+    overflow: visible;
 
     img {
-        width: 40px;
-        height: 40px;
-        margin-top: 1rem;
-        margin-bottom: 10px;
+      transform: scale(1.2);
+      transition: all 0.5s ease;
     }
-
-    &:hover {
-        background: var(--win-app-hover-bg);
-        overflow: visible;
-
-        img {
-            transform: scale(1.2);
-            transition: all 0.5s ease;
-        }
-    }
+  }
 }

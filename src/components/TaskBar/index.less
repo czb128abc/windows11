@@ -1,57 +1,57 @@
-@import url("@/assets/css/base.less");
+@import url('@/assets/css/base.less');
 
 .task-bar {
-    z-index: 10000;
-    height: @task-bar-height;
-    background: rgba(34, 49, 103, 63%);
-    backdrop-filter: blur(25.6901px);
-    color: #fff;
-    padding: 0 1rem;
+  z-index: 10000;
+  height: @task-bar-height;
+  background: rgba(34, 49, 103, 63%);
+  backdrop-filter: blur(25.6901px);
+  color: #fff;
+  padding: 0 1rem;
 }
 
 .task-bar-apps {
-    gap: @task-bar-row-gap;
-    justify-content: flex-start;
+  gap: @task-bar-row-gap;
+  justify-content: flex-start;
 }
 
-.task-bar-right-panel{
-    position: absolute;
-    right: 22px;
-    top: 0;
-    height: 100%;
+.task-bar-right-panel {
+  position: absolute;
+  right: 22px;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: @task-bar-row-gap;
+
+  .bar-status {
     display: flex;
     align-items: center;
-    gap: @task-bar-row-gap;
-    
-    .bar-status {
-        display: flex;
-        align-items: center;
-        padding: 0 0.25rem;
-        min-height: 36px;
-        gap: 0.5rem;
-        border-radius: 4px;
+    padding: 0 0.25rem;
+    min-height: 36px;
+    gap: 0.5rem;
+    border-radius: 4px;
 
-        .icon {
-            color: #fff;
-            font-size: 14px;
-        }
-
-        &:hover {
-            background: var(--win-app-hover-bg);
-        }
-
-        &.time-bar{
-            flex-direction: column;
-            gap: 0;
-        }
+    .icon {
+      color: #fff;
+      font-size: 14px;
     }
+
+    &:hover {
+      background: var(--win-app-hover-bg);
+    }
+
+    &.time-bar {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
 }
 
 .task-bar-app {
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 9%);
-    border-radius: 4px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 9%);
+  border-radius: 4px;
 
-    &:hover {
-        background: var(--win-app-hover-bg);
-    }
+  &:hover {
+    background: var(--win-app-hover-bg);
+  }
 }

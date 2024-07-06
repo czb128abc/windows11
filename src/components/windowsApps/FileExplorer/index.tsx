@@ -2,12 +2,18 @@ import Window from '@/components/Window';
 import type { AppIns } from '@/typings';
 
 type Props = {
-    appIns: AppIns;
+  appIns: AppIns;
+  windowTitle?: string;
+  windowIcon?: string;
 };
 
-const FileExplorer = (props: Props) => {
-    const { appIns } = props;
-  return <Window appIns={appIns}>fileExplorer</Window>;
+const FileExplorer: React.FC<Props> = (props) => {
+  const { appIns, windowIcon, windowTitle } = props;
+  return (
+    <Window appIns={appIns} windowIcon={windowIcon} windowTitle={windowTitle}>
+      fileExplorer
+    </Window>
+  );
 };
 
 export default FileExplorer;

@@ -1,66 +1,65 @@
-.app-window{
+.app-window {
+  position: absolute;
+  left: 20vw;
+  top: 20vh;
+  width: 60vw;
+  height: 60vh;
+  border: 1px solid #8080804c;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 75%);
+  overflow: auto;
+  resize: both;
+  touch-action: none;
+
+  &.full-screen {
+    transform: translate(0, 0) !important;
+    width: 100% !important;
+    height: 100% !important;
+    left: 0;
+    top: 0;
+    resize: none;
+  }
+
+  &-header {
+    font-size: 12px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    background-color: var(--win-app-window-header-bg);
+
+    .app-window-icon {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &-toolbar {
     position: absolute;
-    left: 20vw;
-    top: 20vh;
-    width: 60vw;
-    height: 60vh;
-    border: 1px solid #8080804c;
-    border-radius: .5rem;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 75%);
-    overflow: auto;
-    resize: both;
-    touch-action: none;
+    right: 0;
+    top: 1px;
+    z-index: 100;
 
-    &.full-screen{
-        transform: translate(0, 0)!important;
-        width: 100% !important;
-        height: 100% !important;
-        left: 0;
-        top: 0;
-        resize:none;
+    .toolbar-btn {
+      height: 28px;
+      width: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        cursor: pointer;
+        background-color: var(--win-app-hover-bg);
+      }
+
+      &.btn-close:hover {
+        background-color: var(--win-app-close-bg);
+      }
     }
+  }
 
-    &-header{
-        font-size: 12px;
-        height: 28px;
-        display: flex;
-        align-items: center;
-        padding-left: 0.5rem;
-        background-color: var(--win-app-window-header-bg);
-
-        .app-window-icon {
-            width: 14px;
-            height: 14px;
-        }
-    }
-
-    &-toolbar{
-        position: absolute;
-        right: 0;
-        top: 1px;
-        z-index: 100;
-
-        .toolbar-btn{
-            height: 28px;
-            width: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            &:hover{
-                cursor: pointer;
-                background-color: var(--win-app-hover-bg);
-            }
-
-            &.btn-close:hover {
-                background-color: var(--win-app-close-bg);
-            }
-        }
-    }
-
-    &-content{
-        background-color: var(--win-app-window-bg);
-        height: calc(100% - 28px);
-    }
-
+  &-content {
+    background-color: var(--win-app-window-bg);
+    height: calc(100% - 28px);
+  }
 }
