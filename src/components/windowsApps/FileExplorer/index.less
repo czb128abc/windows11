@@ -1,0 +1,57 @@
+.file-explorer-commands {
+  background: var(--win-app-window-header-bg);
+
+  .anticon {
+    font-size: 16px;
+
+    &.down-outlined {
+      font-size: 12px;
+    }
+  }
+
+  .command-item:hover {
+    background-color: var(--win-app-hover-bg);
+    cursor: pointer;
+    border-radius: 4px;
+  }
+}
+
+.file-explorer-nav {
+  @apply flex items-center justify-center my-1;
+
+  .nav-arrow {
+    @apply flex items-center justify-center;
+    width: 30px;
+    height: 30px;
+
+    &:hover {
+      background-color: var(--win-app-hover-bg);
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  }
+}
+
+.file-explorer-quick-link {
+  border-right: 2px solid #222;
+
+  .quick-link-item:hover {
+    @apply cursor-pointer;
+    background: var(--win-app-hover-bg);
+  }
+}
+
+.file-explorer-content {
+  @apply flex flex-row flex-wrap content-start gap-1;
+
+  &-item{
+    @apply flex flex-col justify-center items-center;
+    height: 110px;
+    width: 106px;
+
+    &:hover {
+      @apply cursor-pointer;
+      background: var(--win-app-hover-bg);
+    }
+  }
+}

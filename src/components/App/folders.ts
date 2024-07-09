@@ -1,3 +1,4 @@
+import { Folder } from '@/typings';
 import Desktop from './../../assets/icons/desktop-folder-icon.png';
 import DiskWins from './../../assets/icons/disk-wins.png';
 import Disk from './../../assets/icons/disk.png';
@@ -11,7 +12,7 @@ import RecycleBin from './../../assets/icons/recycle-bin.png';
 import ThisPC from './../../assets/icons/this-pc.png';
 import Video from './../../assets/icons/video-folder.png';
 
-export const folders = [
+export const folders: Folder[] = [
   {
     name: 'Local Disk (C:)',
     header: 'C:',
@@ -150,4 +151,54 @@ export const folders = [
     path: 'Recycle bin:',
     icon: RecycleBin,
   },
+];
+
+function getParentPath(path: string) {
+  // 查找最后一个斜杠的位置
+  const lastSlashIndex = path.lastIndexOf('/');
+  
+  // 如果找到了斜杠并且它不是第一个字符，则返回父路径
+  if (lastSlashIndex > 0) {
+      return path.substring(0, lastSlashIndex);
+  }
+  
+  // 如果没有找到斜杠或者它是第一个字符，说明这是根路径，返回空字符串或根据需求处理
+  return '';
+}
+
+function calcToFolderMap() {
+  const tempMap: Record<string,Folder> = {
+    root: {
+      name:'',
+      header:'',
+      path:'',
+      icon: undefined,
+      childern:[]
+    }
+  };
+  folders.forEach(item=> {
+    tempMap[item.path] = item;
+    tempMap[item.path].childern = [];
+    tempMap[item.path].parent = getParentPath(item.path);
+  });
+
+  Object.keys(tempMap).forEach(item=> {
+    const parent = tempMap[item].parent || 'root';
+    tempMap[parent].childern?.push(tempMap[item])
+  })
+
+
+
+  return tempMap;
+}
+
+export const folderMap = calcToFolderMap();
+
+
+export const quickLinks = [
+  'This PC:/desktop',
+  'This PC:/downloads',
+  'This PC:/pictures',
+  'This PC:/music',
+  'This PC:/videos',
 ];

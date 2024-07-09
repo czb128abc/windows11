@@ -1,7 +1,20 @@
 import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
-  antd: {},
+  antd: {
+    configProvider: {},
+    // dark: true,
+    // theme: {
+    //   "token": {
+    //     "colorBgBase": "#12141b",
+    //     "borderRadius": 4,
+    //     "colorPrimary": "#4cc2ff",
+    //     "colorInfo": "#4cc2ff",
+    //     "colorTextBase": "#ffffff"
+    //   }
+    // }
+  },
+  icons:{},
   access: {},
   valtio: {},
   model: {},

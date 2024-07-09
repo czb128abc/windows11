@@ -2,6 +2,8 @@ import useWindows from '@/hooks/useWindows';
 import { SoundOutlined, UpOutlined, WifiOutlined } from '@ant-design/icons';
 import './index.less';
 import TaskBarApps from './taskBarApps';
+import { Popover, Space } from 'antd';
+import QuickSettings from '../windowsApps/QuickSettings';
 
 const TaskBar: React.FC = () => {
   const { currentDesktop } = useWindows();
@@ -18,8 +20,19 @@ const TaskBar: React.FC = () => {
         </div>
         <div className="bar-status language-bar">ENG</div>
         <div className="bar-status status-bar">
-          <WifiOutlined className="icon" />
-          <SoundOutlined className="icon" />
+          <Popover
+            overlayClassName='task-bar-popover'
+            arrow={false}
+            autoAdjustOverflow
+            content={<QuickSettings />}
+            trigger="click"
+            defaultOpen={true}
+          >
+            <Space size={4}>
+              <WifiOutlined className="icon" />
+              <SoundOutlined className="icon" />
+            </Space>
+          </Popover>
         </div>
         <div className="bar-status time-bar">
           <div className="date--time-clock">7:28 PM</div>

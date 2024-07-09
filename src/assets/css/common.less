@@ -1,10 +1,32 @@
 @import url('./base.less');
 
 .desktop {
-  color: #fff;
+  --win-app-hover-bg: rgba(136, 136, 136, 20%);
+  --win-app-base-text-color: #2f2f2f;
+  --win-app-close-bg: rgba(255, 0, 0, 80%);
+  --win-app-window-bg: #eff4f9;
+  --win-app-window-header-bg: #f0f5f9;
+
+  font-family: 'Abel';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12.1975px;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+
+  &.dark-theme {
+    --win-app-hover-bg: rgba(255, 255, 255, 16%);
+    --win-app-base-text-color: #fff;
+    --win-app-close-bg: rgba(255, 0, 0, 80%);
+    --win-app-window-bg: #12141b;
+    --win-app-window-header-bg: #202028d6;
+  }
+}
+
+.desktop {
+  color: var(--win-app-base-text-color);
   height: 100vh;
   padding-bottom: @task-bar-height;
-  background: #091328;
   font-size: 12px;
   @apply relative;
 }
@@ -13,7 +35,6 @@
   padding-bottom: 0.5rem;
   width: 72px;
   max-height: 102px;
-  color: #fff;
   overflow: hidden;
   text-align: center;
   display: flex;
@@ -36,4 +57,8 @@
       transition: all 0.5s ease;
     }
   }
+}
+
+.task-bar-popover .ant-popover-content {
+  transform: translateY(-18px) translateX(-8px) !important;
 }

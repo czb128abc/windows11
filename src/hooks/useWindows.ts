@@ -2,7 +2,8 @@ import {
   desktopApps,
   recommendedAppsInStartMenu,
 } from '@/components/App/Applications';
-import type { AppInfo, AppIns, Desktop, InitState } from '@/typings';
+import { resourceMap } from '@/constants/resourceMap';
+import type { AppInfo, AppIns, Desktop, InitState, OsSettings } from '@/typings';
 import { proxy, useSnapshot } from '@umijs/max';
 import { useMemo } from 'react';
 
@@ -17,20 +18,37 @@ function getDefaultAppInfo(list: AppInfo[]) {
   });
 }
 
+const wallpapers = [
+  ...resourceMap.lightWallpapers,
+  ...resourceMap.darkWallpapers,
+];
+
 function createDesktop() {
   const desktop: Desktop = {
     runningApps: [],
     desktopApps: getDefaultAppInfo(desktopApps),
     recommendedAppsInStartMenu: getDefaultAppInfo(recommendedAppsInStartMenu),
     maxWindowZIndex: 100,
+    currentWallpaper: {
+      index: 0,
+      url: wallpapers[0],
+    },
   };
   return desktop;
 }
 
 function createInitState(): InitState {
+  const themes = ['dark', 'light'];
   return {
     desktops: [createDesktop()],
     currentDesktopIndex: 0,
+    currentTheme: themes[0],
+    wallpapers,
+    settings:{
+      wifi: false,
+      bluetooth: false,
+      darkTheme: true,
+    }
   };
 }
 
@@ -92,8 +110,8 @@ export const actions = {
       layout: {
         x: 0,
         y: 0,
-        width: 500,
-        height: 400,
+        width: 850,
+        height: 600,
         zIndex: tempDesktop.maxWindowZIndex,
       },
     };
@@ -179,22 +197,44 @@ export const actions = {
       }
     }
   },
+  nextDesktopBackground() {
+    const tempDesktop = getCurrentDesktop();
+    let index =
+      state.wallpapers.findIndex(
+        (_, i) => i === tempDesktop.currentWallpaper.index,
+      ) || 0;
+    if (index + 1 === state.wallpapers.length) {
+      index = -1;
+    }
+    tempDesktop.currentWallpaper = {
+      index: index + 1,
+      url: wallpapers[index + 1],
+    };
+  },
+  setOSSettingItem(type: string,  value: boolean){
+    state.settings[type as keyof OsSettings] = value;
+  }
+};
+
+window.getState = ()=> {
+  return JSON.parse(JSON.stringify(state))
 };
 
 const useWindows = () => {
   const snap = useSnapshot(state) as InitState;
   const { currentDesktopIndex, desktops } = snap;
-  const currentDesktop = useMemo<Desktop>(() => {
+  const currentDesktop: Desktop = useMemo<Desktop>(() => {
     return desktops[currentDesktopIndex] as Desktop;
   }, [desktops, currentDesktopIndex]);
   return {
     state: snap,
     currentDesktop,
-    runApp: actions.runApp,
-    minimizeApp: actions.minimizeApp,
-    triggerMaximizeApp: actions.triggerMaximizeApp,
-    closeApp: actions.closeApp,
-    setWindowPositionForemost: actions.setWindowPositionForemost,
+    ...actions,
+    // runApp: actions.runApp,
+    // minimizeApp: actions.minimizeApp,
+    // triggerMaximizeApp: actions.triggerMaximizeApp,
+    // closeApp: actions.closeApp,
+    // setWindowPositionForemost: actions.setWindowPositionForemost,
   };
 };
 

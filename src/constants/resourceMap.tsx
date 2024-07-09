@@ -10,6 +10,9 @@ import Spotify from './../assets/images/icons/spotify.png';
 import Store from './../assets/images/icons/store.png';
 import ThisPC from './../assets/images/icons/this-pc.png';
 import VSCodeIcon from './../assets/images/icons/vscode.png';
+import darkWallpaper from './../assets/images/wallpaper/dark/img0.jpg';
+import lightWallpaper from './../assets/images/wallpaper/light/img0.jpg';
+
 
 export const resourceMap = {
   Explorer,
@@ -24,6 +27,8 @@ export const resourceMap = {
   NotepadIcon,
   Board,
   VSCodeIcon,
+  darkWallpapers:[darkWallpaper,],
+  lightWallpapers:[lightWallpaper,]
 };
 
 export function getResource(name: string) {
