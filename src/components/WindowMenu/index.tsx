@@ -3,6 +3,12 @@ import { Item, ItemParams, Menu, Separator, Submenu } from 'react-contexify';
 
 export const MENU_ID = 'win-menu-id';
 
+/**
+ * 定义窗口菜单组件。
+ * 
+ * 该组件使用hooks获取窗口操作相关功能，并通过渲染菜单项来提供用户界面。
+ * 菜单项的点击事件被处理以触发相应的窗口操作。
+ */
 const WindowMenu = () => {
   const { nextDesktopBackground } = useWindows();
   const handleMenuItemClick = (item: ItemParams) => {

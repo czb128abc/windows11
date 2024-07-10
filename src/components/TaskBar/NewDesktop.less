@@ -1,0 +1,26 @@
+.new-desktop-popover {
+  .new-desktop {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: calc(100vh - var(--win-task-bar-height, 48px));
+    background: rgba(255, 255, 255, 0.315);
+  }
+  .desktops {
+    @apply flex justify-center items-center mx-2 p-2 gap-4 rounded;
+    background-color: rgba(5, 37, 143,0.95);
+
+    .desktop-item {
+      @apply flex flex-col justify-center items-stretch p-1 relative rounded;
+      background: rgba(255, 255, 255, 0.126);
+      &:hover {
+        background: rgba(255, 255, 255, 16%);
+      }
+
+      .icon-close {
+        @apply absolute top-1 right-1 cursor-pointer;
+      }
+    }
+  }
+}

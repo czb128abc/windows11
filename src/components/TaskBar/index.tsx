@@ -1,15 +1,16 @@
 import useWindows from '@/hooks/useWindows';
 import { SoundOutlined, UpOutlined, WifiOutlined } from '@ant-design/icons';
-import './index.less';
-import TaskBarApps from './taskBarApps';
 import { Popover, Space } from 'antd';
 import QuickSettings from '../windowsApps/QuickSettings';
-
+import './index.less';
+import NewDesktop from './NewDesktop';
+import TaskBarApps from './taskBarApps';
 const TaskBar: React.FC = () => {
   const { currentDesktop } = useWindows();
   return (
     <div className="task-bar flex items-center fixed bottom-0 w-full">
       <div className="task-bar-apps flex-1 flex items-center justify-center my-2">
+        <NewDesktop />
         {currentDesktop.recommendedAppsInStartMenu.map((item) => {
           return <TaskBarApps key={item.name} appInfo={item} />;
         })}
@@ -21,7 +22,7 @@ const TaskBar: React.FC = () => {
         <div className="bar-status language-bar">ENG</div>
         <div className="bar-status status-bar">
           <Popover
-            overlayClassName='task-bar-popover'
+            overlayClassName="task-bar-popover"
             arrow={false}
             autoAdjustOverflow
             content={<QuickSettings />}

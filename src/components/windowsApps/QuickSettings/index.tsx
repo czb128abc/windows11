@@ -143,7 +143,7 @@ const QuickSettings = () => {
             <Slider></Slider>
           </div>
         </div>
-        <Space>
+        <Space className='hidden'>
           <Button type="primary">yes</Button>
           <Button>yes</Button>
           <Button>yes</Button>
