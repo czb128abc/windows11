@@ -9,6 +9,7 @@ import Settings from './../assets/images/icons/settings.png';
 import Spotify from './../assets/images/icons/spotify.png';
 import Store from './../assets/images/icons/store.png';
 import ThisPC from './../assets/images/icons/this-pc.png';
+import SwitchDesktop from './../assets/images/icons/switch-desktop.png';
 import VSCodeIcon from './../assets/images/icons/vscode.png';
 import darkWallpaper from './../assets/images/wallpaper/dark/img0.jpg';
 import lightWallpaper from './../assets/images/wallpaper/light/img0.jpg';
@@ -27,11 +28,12 @@ export const resourceMap = {
   NotepadIcon,
   Board,
   VSCodeIcon,
+  SwitchDesktop,
   darkWallpapers:[darkWallpaper,],
   lightWallpapers:[lightWallpaper,]
 };
 
 export function getResource(name: string) {
-  const resource = resourceMap[name as keyof typeof resourceMap];
+  const resource = resourceMap[name as keyof typeof resourceMap] as string;
   return resource || resourceMap.Folder;
 }

@@ -31,6 +31,7 @@ export type AppIns<T = ''> = {
   // isMinimizable: boolean;
 };
 export type Desktop = {
+  desktopName: string;
   runningApps: AppIns[];
   desktopApps: AppInfo[];
   recommendedAppsInStartMenu: AppInfo[];
@@ -44,6 +45,7 @@ export type OsSettings = {
   wifi: boolean;
   bluetooth: boolean;
   darkTheme: boolean;
+  newDesktopPopoverOpen: boolean;
 };
 export type InitState = {
   desktops: Desktop[];
@@ -64,4 +66,10 @@ export type Folder = {
   header: string;
   path: string;
   icon: string | undefined;
+};
+
+
+type Size = {
+  width: number;
+  height: number;
 };

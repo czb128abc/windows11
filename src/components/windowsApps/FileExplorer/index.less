@@ -33,7 +33,8 @@
 }
 
 .file-explorer-quick-link {
-  border-right: 2px solid #222;
+  @apply pt-1;
+  border-right: 2px solid var(--win-base-border-color);
 
   .quick-link-item:hover {
     @apply cursor-pointer;
@@ -42,7 +43,7 @@
 }
 
 .file-explorer-content {
-  @apply flex flex-row flex-wrap content-start gap-1;
+  @apply flex flex-row flex-wrap content-start gap-1 pt-1;
 
   &-item{
     @apply flex flex-col justify-center items-center;
@@ -53,5 +54,16 @@
       @apply cursor-pointer;
       background: var(--win-app-hover-bg);
     }
+  }
+}
+
+.file-explorer-main {
+  border-top: 1px solid var(--win-base-border-color);
+}
+
+body[data-theme='light'] {
+
+  .icon-command svg path {
+    fill: var(--win-app-base-text-color);
   }
 }

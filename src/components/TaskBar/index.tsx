@@ -1,12 +1,13 @@
-import useWindows from '@/hooks/useWindows';
+import useWindows, { CommWindowsProps } from '@/hooks/useWindows';
 import { SoundOutlined, UpOutlined, WifiOutlined } from '@ant-design/icons';
 import { Popover, Space } from 'antd';
 import QuickSettings from '../windowsApps/QuickSettings';
 import './index.less';
 import NewDesktop from './NewDesktop';
 import TaskBarApps from './taskBarApps';
-const TaskBar: React.FC = () => {
-  const { currentDesktop } = useWindows();
+const TaskBar: React.FC<CommWindowsProps> = (props) => {
+  const { desktopIndex } = props;
+  const { currentDesktop } = useWindows(desktopIndex);
   return (
     <div className="task-bar flex items-center fixed bottom-0 w-full">
       <div className="task-bar-apps flex-1 flex items-center justify-center my-2">

@@ -6,7 +6,6 @@ const FileExplorerContent: React.FC<FileExplorerProps> = ({
   path,
 }) => {
   const folder = folderMap[path];
-  console.log("🚀 ~ folder:", folder)
   return (
     <div className="file-explorer-content flex-1 p-2 pt-0">
       {folder.childern?.map((item) => (

@@ -13,49 +13,49 @@ const commands = [
   {
     type: 'new',
     text: 'new',
-    iconRender: <Icon component={NewSvg} />,
+    iconRender: <Icon className="icon-command" component={NewSvg} />,
     showMore: true,
   },
   {
     type: 'cut',
     text: 'Cut',
-    iconRender: <Icon component={CutSvg} />,
+    iconRender: <Icon className="icon-command" component={CutSvg} />,
   },
   {
     type: 'copy',
     text: 'Copy',
-    iconRender: <Icon component={CopySvg} />,
+    iconRender: <Icon className="icon-command" component={CopySvg} />,
   },
   {
     type: 'paste',
     text: 'Paste',
-    iconRender: <Icon component={PasteSvg} />,
+    iconRender: <Icon className="icon-command" component={PasteSvg} />,
   },
   {
     type: 'rename',
     text: 'Rename',
-    iconRender: <Icon component={RenameSvg} />,
+    iconRender: <Icon className="icon-command" component={RenameSvg} />,
   },
   {
     type: 'modernShare',
     text: 'ModernShare',
-    iconRender: <Icon component={ModernShareSvg} />,
+    iconRender: <Icon className="icon-command" component={ModernShareSvg} />,
   },
   {
     type: 'recycle',
     text: 'Recycle',
-    iconRender: <Icon component={RecycleSvg} />,
+    iconRender: <Icon className="icon-command" component={RecycleSvg} />,
   },
   {
     type: 'sort',
     text: 'Sort',
-    iconRender: <Icon component={SortSvg} />,
+    iconRender: <Icon className="icon-command" component={SortSvg} />,
     showMore: true,
   },
   {
     type: 'view',
     text: 'View',
-    iconRender: <Icon component={ViewSvg} />,
+    iconRender: <Icon className="icon-command" component={ViewSvg} />,
     showMore: true,
   },
 ];

@@ -3,9 +3,19 @@ import {
   recommendedAppsInStartMenu,
 } from '@/components/App/Applications';
 import { resourceMap } from '@/constants/resourceMap';
-import type { AppInfo, AppIns, Desktop, InitState, OsSettings } from '@/typings';
+import type {
+  AppInfo,
+  AppIns,
+  Desktop,
+  InitState,
+  OsSettings,
+} from '@/typings';
 import { proxy, useSnapshot } from '@umijs/max';
 import { useMemo } from 'react';
+
+export type CommWindowsProps = {
+  desktopIndex: number;
+}& React.PropsWithChildren;
 
 function getDefaultAppInfo(list: AppInfo[]) {
   return list.map((app) => {
@@ -23,7 +33,7 @@ const wallpapers = [
   ...resourceMap.darkWallpapers,
 ];
 
-function createDesktop() {
+function createDesktop(desktopIndex = 0) {
   const desktop: Desktop = {
     runningApps: [],
     desktopApps: getDefaultAppInfo(desktopApps),
@@ -33,22 +43,24 @@ function createDesktop() {
       index: 0,
       url: wallpapers[0],
     },
+    desktopName: `desktop ${desktopIndex + 1}`,
   };
   return desktop;
 }
 
-function createInitState(): InitState {
+function createInitState(index = 0): InitState {
   const themes = ['dark', 'light'];
   return {
-    desktops: [createDesktop()],
-    currentDesktopIndex: 0,
+    desktops: [createDesktop(index)],
+    currentDesktopIndex: index,
     currentTheme: themes[0],
     wallpapers,
-    settings:{
+    settings: {
       wifi: false,
       bluetooth: false,
       darkTheme: true,
-    }
+      newDesktopPopoverOpen: false,
+    },
   };
 }
 
@@ -110,8 +122,8 @@ export const actions = {
       layout: {
         x: 0,
         y: 0,
-        width: 850,
-        height: 600,
+        width: 400*1.8,
+        height: 300*1.8,
         zIndex: tempDesktop.maxWindowZIndex,
       },
     };
@@ -150,6 +162,14 @@ export const actions = {
     // 如果找到应用程序实例，将其设置为最小化状态
     if (appIns) {
       appIns.isMinimized = true;
+    }
+  },
+  showApp(appInsId: string) {
+    // 根据ID查找并获取应用程序实例
+    const appIns = actions.findRunningAppById(appInsId);
+    // 如果找到应用程序实例，将其设置为非最小化状态
+    if (appIns) {
+      appIns.isMinimized = false;
     }
   },
   /**
@@ -211,21 +231,51 @@ export const actions = {
       url: wallpapers[index + 1],
     };
   },
-  setOSSettingItem(type: string,  value: boolean){
+  setOSSettingItem(type: string, value: boolean) {
     state.settings[type as keyof OsSettings] = value;
-  }
+    if(type === 'darkTheme'){
+      state.currentTheme = value ? 'dark' : 'light';
+      document.body.dataset.theme = state.currentTheme;
+    }
+  },
+  sortDesktopName() {
+    state.desktops.forEach((item, index) => {
+      state.desktops[index].desktopName = `desktop ${index + 1}`;
+    });
+  },
+  createDesktop() {
+    const { currentDesktopIndex } = state;
+    const tempDesktop = createDesktop(currentDesktopIndex + 1);
+    state.desktops.push(tempDesktop);
+    state.currentDesktopIndex = currentDesktopIndex + 1;
+    actions.sortDesktopName();
+  },
+  removeDesktop(index: number) {
+    const { currentDesktopIndex } = state;
+    if (currentDesktopIndex === 0) {
+      return;
+    }
+    state.desktops.splice(index, 1);
+    state.currentDesktopIndex = currentDesktopIndex - 1;
+    actions.sortDesktopName();
+  },
+  setDescktopActive(index: number) {
+    state.currentDesktopIndex = index;
+  },
 };
 
-window.getState = ()=> {
-  return JSON.parse(JSON.stringify(state))
+actions.setOSSettingItem('darkTheme',true);
+
+window.getState = () => {
+  return JSON.parse(JSON.stringify(state));
 };
 
-const useWindows = () => {
+const useWindows = (desktopIndex = state.currentDesktopIndex) => {
   const snap = useSnapshot(state) as InitState;
-  const { currentDesktopIndex, desktops } = snap;
+  const { desktops } = snap;
   const currentDesktop: Desktop = useMemo<Desktop>(() => {
-    return desktops[currentDesktopIndex] as Desktop;
-  }, [desktops, currentDesktopIndex]);
+    return desktops[desktopIndex] as Desktop;
+  }, [desktops, desktopIndex]);
   return {
     state: snap,
     currentDesktop,
