@@ -1,0 +1,19 @@
+.signin {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: url('~@/assets/images/lockscreen-background.webp') no-repeat;
+  background-size: cover;
+
+  .lock-screen {
+    @apply flex w-full h-full relative justify-center;
+    padding-top: 20vh;
+  }
+
+  .signin-form {
+    @apply flex flex-col items-center justify-center w-full h-full relative;
+    backdrop-filter: blur(25px);
+  }
+}

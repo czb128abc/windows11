@@ -2,14 +2,7 @@
 :root {
   --win-task-bar-height: @task-bar-height;
 }
-body {
-  font-family: 'Abel';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12.1975px;
-  line-height: 16px;
-  letter-spacing: -0.02em;
-}
+
 body[data-theme='light'] {
   --win-app-hover-bg: rgba(136, 136, 136, 20%);
   --win-app-base-text-color: #2f2f2f;
@@ -17,8 +10,8 @@ body[data-theme='light'] {
   --win-app-window-bg: #eff4f9;
   --win-app-window-header-bg: #f0f5f9;
   --win-base-border-color: #e6e6e6;
-  /* new-desktop */ 
-  --win-new-desktop-bg: rgba(255, 255, 255,1);
+  /* new-desktop */
+  --win-new-desktop-bg: rgba(255, 255, 255, 1);
   --win-new-desktop-hover-bg: rgba(183, 250, 233, 1);
 }
 body[data-theme='dark'] {
@@ -28,9 +21,20 @@ body[data-theme='dark'] {
   --win-app-window-bg: #12141b;
   --win-app-window-header-bg: rgb(43, 43, 48);
   --win-base-border-color: #222;
-  /* new-desktop */ 
+  /* new-desktop */
   --win-new-desktop-bg: rgba(255, 255, 255, 0.126);
   --win-new-desktop-hover-bg: rgba(255, 255, 255, 16%);
+}
+
+body {
+  font-family: 'Abel';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12.1975px;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  color: var(--win-app-base-text-color);
+  background: var(--win-app-window-bg);
 }
 
 .desktop {

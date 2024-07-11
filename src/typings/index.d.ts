@@ -1,13 +1,14 @@
-export type AppInfo = {
+export type AppInfo<T = string> = {
   icon: string;
   name: string;
   appType: string;
   singleInstance?: boolean;
   removeHeader?: boolean;
+  data?: T;
 };
-export type AppIns<T = ''> = {
+export type AppIns<T = string> = {
   id: string;
-  appInfo: AppInfo;
+  appInfo: AppInfo<T>;
   isMinimized?: boolean;
   isMaximized?: boolean;
   layout: {
@@ -17,7 +18,7 @@ export type AppIns<T = ''> = {
     height: number;
     zIndex: number;
   };
-  data: T;
+  data?: T;
   // component: React.FC;
   // isOpen: boolean;
   // isFullScreen: boolean;
@@ -46,6 +47,8 @@ export type OsSettings = {
   bluetooth: boolean;
   darkTheme: boolean;
   newDesktopPopoverOpen: boolean;
+  isSignin: boolean;
+  powerOff: boolean;
 };
 export type InitState = {
   desktops: Desktop[];
@@ -53,6 +56,10 @@ export type InitState = {
   currentTheme: string;
   wallpapers: string[];
   settings: OsSettings;
+  user: {
+    username: string;
+    password: string;
+  };
 };
 export type FileExplorerProps = {
   path: string;
@@ -67,7 +74,6 @@ export type Folder = {
   path: string;
   icon: string | undefined;
 };
-
 
 type Size = {
   width: number;

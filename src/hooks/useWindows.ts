@@ -15,7 +15,7 @@ import { useMemo } from 'react';
 
 export type CommWindowsProps = {
   desktopIndex: number;
-}& React.PropsWithChildren;
+} & React.PropsWithChildren;
 
 function getDefaultAppInfo(list: AppInfo[]) {
   return list.map((app) => {
@@ -24,6 +24,7 @@ function getDefaultAppInfo(list: AppInfo[]) {
       name: app.name,
       singleInstance: true,
       appType: app.appType,
+      data: app.data,
     };
   });
 }
@@ -60,6 +61,12 @@ function createInitState(index = 0): InitState {
       bluetooth: false,
       darkTheme: true,
       newDesktopPopoverOpen: false,
+      isSignin: true,
+      powerOff: false,
+    },
+    user: {
+      username: 'chen zhangbo',
+      password: '123',
     },
   };
 }
@@ -85,17 +92,17 @@ export const actions = {
    */
   runApp(appInfo: AppInfo, forceDisplayWindow = false) {
     // 获取当前桌面环境
-    const tempDesktop = getCurrentDesktop();
+    const currentDesktop = getCurrentDesktop();
     // 解构获取appInfo中的单一实例属性
     const { singleInstance } = appInfo;
     // 增加桌面窗口最大Z轴索引值
-    tempDesktop.maxWindowZIndex += 1;
+    currentDesktop.maxWindowZIndex += 1;
     // 根据是否为单一实例生成应用实例ID
     const appInsId = singleInstance
       ? appInfo.name
       : `${appInfo.name}-${Math.random()}`;
     // 查找是否有相同ID的应用实例已运行
-    const insWithSameId = tempDesktop.runningApps.find(
+    const insWithSameId = currentDesktop.runningApps.find(
       (appIns) => appIns.id === appInsId,
     );
     // 如果找到相同ID的应用实例，切换其最小化状态
@@ -119,20 +126,17 @@ export const actions = {
       },
       isMaximized: false,
       isMinimized: false,
+      data: appInfo.data,
       layout: {
         x: 0,
         y: 0,
-        width: 400*1.8,
-        height: 300*1.8,
-        zIndex: tempDesktop.maxWindowZIndex,
+        width: 400 * 1.8,
+        height: 300 * 1.8,
+        zIndex: currentDesktop.maxWindowZIndex,
       },
     };
     // 将新应用实例添加到运行中的应用列表
-    tempDesktop.runningApps.push(appIns);
-    console.log(
-      '🚀 ~ runApp ~ tempDesktop:',
-      JSON.parse(JSON.stringify(tempDesktop)),
-    );
+    currentDesktop.runningApps.push(appIns);
   },
   /**
    * 根据ID查找运行中的应用程序实例。
@@ -233,7 +237,7 @@ export const actions = {
   },
   setOSSettingItem(type: string, value: boolean) {
     state.settings[type as keyof OsSettings] = value;
-    if(type === 'darkTheme'){
+    if (type === 'darkTheme') {
       state.currentTheme = value ? 'dark' : 'light';
       document.body.dataset.theme = state.currentTheme;
     }
@@ -262,10 +266,21 @@ export const actions = {
   setDescktopActive(index: number) {
     state.currentDesktopIndex = index;
   },
+  setSignin(signin: boolean) {
+    state.settings.isSignin = signin;
+  },
+  shutdown() {
+    state.settings.powerOff = true;
+  },
+  restart(){
+    state.settings.powerOff = true;
+    setTimeout(() => {
+      state.settings.isSignin = false;
+      state.settings.powerOff = false;
+    }, 3000);
+  },
 };
-
-actions.setOSSettingItem('darkTheme',true);
-
+// eslint-disable-next-line
 window.getState = () => {
   return JSON.parse(JSON.stringify(state));
 };

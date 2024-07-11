@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import 'react-contexify/dist/ReactContexify.css';
 
 const Desktop: React.FC<CommWindowsProps> = (props) => {
-  const {  desktopIndex, children } = props;
+  const { desktopIndex, children } = props;
   const { currentDesktop, state } = useWindows(desktopIndex);
   const { runningApps } = currentDesktop;
   const { show } = useContextMenu({
@@ -21,14 +21,14 @@ const Desktop: React.FC<CommWindowsProps> = (props) => {
 
   return (
     <div
-      className={classNames('desktop', {
+      className={classNames('desktop overflow-hidden', {
         'dark-theme': state.settings.darkTheme,
       })}
       onContextMenu={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
         show({ event: e })
       }
     >
-      <Wallpaper />
+      <Wallpaper desktopIndex={desktopIndex} />
       <App />
       {children}
       {runningApps.map((appIns) => {
