@@ -48,10 +48,46 @@
 }
 
 .task-bar-app {
+  @apply flex relative justify-center transition-all items-center;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 9%);
   border-radius: 4px;
+  height: 40px;
+  width: 40px;
 
   &:hover {
     background: var(--win-app-hover-bg);
+  }
+  .task-bar-app-badge {
+    @apply absolute bottom-0 left-0 w-full flex justify-center;
+  }
+  .task-bar-app-badge-inner {
+    @apply rounded-sm;
+    height: 2px;
+    transform: translateY(-4px);
+
+    &.running {
+      width: 6px;
+      background: #858585;
+    }
+    &.opened {
+      width: 12px;
+      background: #4cc2ff;
+    }
+  }
+}
+
+.start-menu-item {
+  &:hover {
+    background: var(--win-app-hover-bg);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 9%);
+    border-radius: 4px;
+  }
+
+}
+.power-menu {
+  @apply flex gap-2 flex-col;
+
+  &-item {
+    @apply flex gap-2 items-center hover:bg-slate-500 px-2 rounded cursor-pointer;
   }
 }

@@ -23,7 +23,7 @@ const NewDesktop = () => {
     setDescktopActive,
     setOSSettingItem,
     setWindowPositionForemost,
-    showApp
+    showApp,
   } = useWindows();
   const popoverHoverOpen = state.settings.newDesktopPopoverOpen;
   const [runningApps, setRunningApps] = useState<AppIns[]>([]);
@@ -69,7 +69,7 @@ const NewDesktop = () => {
                 const Temp = getApplicationByAppType(
                   appIns.appInfo.appType as AppType,
                 );
-                const tempAppIns = {...appIns};
+                const tempAppIns = { ...appIns };
                 tempAppIns.isMinimized = false;
                 tempAppIns.isMaximized = false;
                 return (
@@ -106,6 +106,7 @@ const NewDesktop = () => {
                       className="icon-close hover:scale-125"
                       onClick={(e) => {
                         e.preventDefault();
+                        e.stopPropagation();
                         removeDesktop(index);
                       }}
                     >
@@ -134,7 +135,7 @@ const NewDesktop = () => {
       }
       trigger="click"
     >
-      <div className="task-bar-app flex relative justify-center transition-all items-center h-[40px] w-[40px]">
+      <div className="task-bar-app">
         <img
           className="h-[26px] w-[26px]"
           src={getResource('SwitchDesktop')}

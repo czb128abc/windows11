@@ -1,3 +1,4 @@
+import { themeMap } from '@/constants';
 import useWindows from '@/hooks/useWindows';
 import { OsSettings } from '@/typings';
 import {
@@ -10,30 +11,8 @@ import {
 import { useAntdConfigSetter } from '@umijs/max';
 import { Button, Slider, Space, theme } from 'antd';
 import classNames from 'classnames';
-import { useEffect } from 'react';
 import './index.less';
 const { darkAlgorithm, defaultAlgorithm } = theme;
-
-const dark = {
-  token: {
-    colorBgBase: '#12141b',
-    colorPrimary: '#4cc2ff',
-    colorInfo: '#4cc2ff',
-    colorTextBase: '#ffffff',
-  },
-};
-const light = {
-  token: {
-    colorBgBase: '#ffffff',
-    colorPrimary: '#4cc2ff',
-    colorInfo: '#4cc2ff',
-    colorTextBase: '#12141b',
-  },
-};
-const themeMap = {
-  dark,
-  light,
-};
 
 type SettingItem = {
   type: keyof OsSettings;
@@ -79,21 +58,13 @@ const QuickSettings = () => {
       const isDarkTheme = !settings.darkTheme;
       const tempTheme = isDarkTheme ? themeMap.dark : themeMap.light;
       const algorithm = isDarkTheme ? [darkAlgorithm] : [defaultAlgorithm];
-      setAntdConfig({
+      const config = {
         theme: { token: tempTheme.token },
         algorithm,
-      });
+      };
+      setAntdConfig(config);
     }
   };
-  useEffect(() => {
-    const isDarkTheme = true;
-    const tempTheme = isDarkTheme ? themeMap.dark : themeMap.light;
-    const algorithm = isDarkTheme ? [darkAlgorithm] : [defaultAlgorithm];
-    setAntdConfig({
-      theme: { token: tempTheme.token },
-      algorithm,
-    });
-  }, []);
   return (
     <div className="w-[360px] px-2 py-2.5">
       <div className="quick-settings flex flex-wrap justify-between">
@@ -143,7 +114,7 @@ const QuickSettings = () => {
             <Slider></Slider>
           </div>
         </div>
-        <Space className='hidden'>
+        <Space className="hidden">
           <Button type="primary">yes</Button>
           <Button>yes</Button>
           <Button>yes</Button>

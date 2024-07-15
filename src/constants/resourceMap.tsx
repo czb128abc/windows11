@@ -8,12 +8,12 @@ import RecycleBin from './../assets/images/icons/recycle-bin.png';
 import Settings from './../assets/images/icons/settings.png';
 import Spotify from './../assets/images/icons/spotify.png';
 import Store from './../assets/images/icons/store.png';
-import ThisPC from './../assets/images/icons/this-pc.png';
 import SwitchDesktop from './../assets/images/icons/switch-desktop.png';
+import ThisPC from './../assets/images/icons/this-pc.png';
 import VSCodeIcon from './../assets/images/icons/vscode.png';
+import Start from './../assets/images/icons/start.png';
 import darkWallpaper from './../assets/images/wallpaper/dark/img0.jpg';
 import lightWallpaper from './../assets/images/wallpaper/light/img0.jpg';
-
 
 export const resourceMap = {
   Explorer,
@@ -29,8 +29,9 @@ export const resourceMap = {
   Board,
   VSCodeIcon,
   SwitchDesktop,
-  darkWallpapers:[darkWallpaper,],
-  lightWallpapers:[lightWallpaper,]
+  Start,
+  darkWallpapers: [darkWallpaper],
+  lightWallpapers: [lightWallpaper],
 };
 
 export function getResource(name: string) {

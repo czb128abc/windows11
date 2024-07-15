@@ -14,7 +14,15 @@ export default defineConfig({
     //   }
     // }
   },
-  icons:{},
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+  history: {
+    type: 'hash',
+  },
+  routes: [
+    { path: '/', redirect: '/appPage' },
+    { path: '/appPage', component: 'appPage' },
+  ],
+  icons: {},
   access: {},
   valtio: {},
   model: {},

@@ -10,9 +10,12 @@ const FileExploreQuickLink: React.FC<FileExplorerProps> = () => {
         {quickLinks.map((item) => {
           const str = folderMap[item].icon || resourceMap.Folder;
           return (
-            <div key={item} className="quick-link-item flex items-center gap-2 p-2">
+            <div
+              key={item}
+              className="quick-link-item flex items-center gap-2 p-2"
+            >
               <div className="w-[20px] h-[20px]">
-                <img className='f-ull w-full' src={str} alt=""></img>
+                <img className="f-ull w-full" src={str} alt=""></img>
               </div>
               <div>{folderMap[item].header}</div>
             </div>

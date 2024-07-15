@@ -88,7 +88,7 @@ export const desktopApps = [
   {
     icon: ThisPC,
     appType: 'FileExplorer',
-    path: 'This PC:',
+    data: 'This PC:',
     name: 'This PC',
   },
   {
@@ -114,13 +114,13 @@ export const desktopApps = [
   {
     icon: Folder,
     appType: 'FileExplorer',
-    path: 'This PC:/desktop/wins-11-github',
+    data: 'This PC:/desktop/wins-11-github',
     name: 'Wins 11 github',
   },
   {
     icon: Folder,
     appType: 'FileExplorer',
-    path: 'This PC:/desktop/portfolio',
+    data: 'This PC:/desktop/portfolio',
     name: 'vito-portfolio-main',
   },
 ];
@@ -139,12 +139,12 @@ export const recommendedAppsInStartMenu = [
   },
   {
     icon: MailIcon,
-    appType: 'Mail',
+    appType: 'FileExplorer',
     name: 'Mail',
   },
   {
     icon: RecycleBin,
-    appType: 'FileExplorer',
+    appType: 'RecycleBin',
     name: 'Recycle bin',
   },
   {

@@ -1,8 +1,8 @@
-import useWindows from '@/hooks/useWindows';
+import useWindows, { CommWindowsProps } from '@/hooks/useWindows';
 import './index.less';
 
-const Wallpaper = () => {
-  const { currentDesktop } = useWindows();
+const Wallpaper: React.FC<CommWindowsProps> = ({ desktopIndex }) => {
+  const { currentDesktop } = useWindows(desktopIndex);
   const url = currentDesktop.currentWallpaper.url;
   return (
     <div

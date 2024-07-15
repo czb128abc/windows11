@@ -10,7 +10,7 @@ import type {
   InitState,
   OsSettings,
 } from '@/typings';
-import { proxy, useSnapshot } from '@umijs/max';
+import { proxy, useSnapshot, proxyWithDevtools } from '@umijs/max';
 import { useMemo } from 'react';
 
 export type CommWindowsProps = {
@@ -72,6 +72,9 @@ function createInitState(index = 0): InitState {
 }
 
 export const state: InitState = proxy(createInitState());
+
+proxyWithDevtools(state, { name: 'proxy', enabled: true })
+
 
 export const getCurrentDesktop = () => {
   return state.desktops[state.currentDesktopIndex] as Desktop;
@@ -279,10 +282,6 @@ export const actions = {
       state.settings.powerOff = false;
     }, 3000);
   },
-};
-// eslint-disable-next-line
-window.getState = () => {
-  return JSON.parse(JSON.stringify(state));
 };
 
 const useWindows = (desktopIndex = state.currentDesktopIndex) => {

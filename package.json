@@ -2,7 +2,7 @@
   "private": true,
   "author": "chenzhangbo <czb128abc@163.com>",
   "scripts": {
-    "build": "max build",
+    "build": "ANALYZE=1 max build",
     "dev": "max dev",
     "format": "prettier --cache --write .",
     "postinstall": "max setup",
@@ -15,8 +15,10 @@
     "@ant-design/icons": "^5.0.1",
     "@ant-design/pro-components": "^2.4.4",
     "@umijs/max": "^4.3.1",
+    "ahooks": "^3.8.0",
     "antd": "^5.19.1",
     "classnames": "^2.5.1",
+    "dayjs": "^1.11.11",
     "react-contexify": "^6.0.0",
     "react-draggable": "^4.4.6",
     "react-resizable": "^3.0.5"

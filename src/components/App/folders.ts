@@ -156,44 +156,41 @@ export const folders: Folder[] = [
 function getParentPath(path: string) {
   // 查找最后一个斜杠的位置
   const lastSlashIndex = path.lastIndexOf('/');
-  
+
   // 如果找到了斜杠并且它不是第一个字符，则返回父路径
   if (lastSlashIndex > 0) {
-      return path.substring(0, lastSlashIndex);
+    return path.substring(0, lastSlashIndex);
   }
-  
+
   // 如果没有找到斜杠或者它是第一个字符，说明这是根路径，返回空字符串或根据需求处理
   return '';
 }
 
 function calcToFolderMap() {
-  const tempMap: Record<string,Folder> = {
+  const tempMap: Record<string, Folder> = {
     root: {
-      name:'',
-      header:'',
-      path:'',
+      name: '',
+      header: '',
+      path: '',
       icon: undefined,
-      childern:[]
-    }
+      childern: [],
+    },
   };
-  folders.forEach(item=> {
+  folders.forEach((item) => {
     tempMap[item.path] = item;
     tempMap[item.path].childern = [];
     tempMap[item.path].parent = getParentPath(item.path);
   });
 
-  Object.keys(tempMap).forEach(item=> {
+  Object.keys(tempMap).forEach((item) => {
     const parent = tempMap[item].parent || 'root';
-    tempMap[parent].childern?.push(tempMap[item])
-  })
-
-
+    tempMap[parent].childern?.push(tempMap[item]);
+  });
 
   return tempMap;
 }
 
 export const folderMap = calcToFolderMap();
-
 
 export const quickLinks = [
   'This PC:/desktop',
